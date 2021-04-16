@@ -4,7 +4,6 @@ Created on Fri Apr 16 2021
 
 @author: Michael Lin
 """
-from collections import defaultdict
 
 
 class Point:
@@ -30,6 +29,7 @@ class Line:
             return self.point_list[key]
         except KeyError:
             print("Please enter either 1 or 2 for point 1 or point 2")
+            return -1
 
     def __str__(self):
         return "Line with point 1: {} and point 2: {}".format(str(self.point1), str(self.point2))
@@ -64,7 +64,8 @@ class IntersectionChecker:
         try:
             return self.line_list[key]
         except KeyError:
-            print("Line {} not imputed correctly")
+            print("Line {} not inputted".format(key))
+            return -1
 
     def set_orientation_mapping(self):
         """
@@ -177,7 +178,9 @@ def main():
     print(intersection_checker[2])
     print("\nCHECK WHETHER THE TWO LINES INTERSECT: ")
     print(intersection_checker.intersection_check(1, 2))
-    print(intersection_checker.intersection_check(1, 3))
+    # print(intersection_checker.intersection_check(1, 3))
+    # print(intersection_checker[1])
+    # print(intersection_checker[1][3])
 
 
 if __name__ == '__main__':
