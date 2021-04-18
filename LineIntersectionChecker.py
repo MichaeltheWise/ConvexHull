@@ -94,7 +94,6 @@ class IntersectionChecker:
             # Raise exception if line doesn't exist
             print("\nPlease check whether lines exist")
             raise KeyError
-            return
 
         self.point1 = line1[1]
         self.point2 = line1[2]
