@@ -6,4 +6,4 @@ Convex Hull algorithms implementated: **Jarvis Walk Algorithm** and **Graham Sca
 ## Phase 3:  
 Compute the upper tangents and lower tangents when given polygons  
 ## Phase 4:  
-Convex Hull divde-and-conquer algorithm
+Convex Hull divde-and-conquer algorithm using the upper and lower tangents
