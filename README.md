@@ -3,7 +3,8 @@
 Check whether two lines intersect to better understand convex hull algorithm  
 ## Phase 2:  
 Convex Hull algorithms implementated: **Jarvis Walk Algorithm** and **Graham Scan Algorithm**  
-Convex Hull Graham Scan has issue when points are in negative quadrants  
+Convex Hull Graham Scan has issues when points are in negative quadrants  
+(Most likely in sorting portion of the algorithm)  
 ## Phase 3:  
 Compute the upper tangents and lower tangents when given polygons  
 ## Phase 4:  
