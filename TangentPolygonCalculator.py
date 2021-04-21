@@ -16,7 +16,10 @@ class Polygon:
         self.point_list = []
         if point_list:
             for point in point_list:
-                self.point_list.append(Point(point[0], point[1]))
+                if isinstance(point, Point):
+                    self.point_list.append(point)
+                else:
+                    self.point_list.append(Point(point[0], point[1]))
 
     def __str__(self):
         return "Polygon with points: {}".format(self.point_list)
@@ -149,26 +152,32 @@ class TangentPolygonCalculator:
         print("\nUpper Tangent: {}".format(self.upper_tangent(a, b)))
         print("Lower Tangent: {}".format(self.lower_tangent(a, b)))
 
-    def upper_tangent(self, a, b):
+    def upper_tangent(self, a, b, idx=False):
         """
         Output the Upper Tangent
         :param a: polygon A
         :param b: polygon B
-        :return: Return the upper tangent points
+        :param idx: output index, default as false
+        :return: Return the upper tangent points or index
         """
         poly_a, poly_b = self._prepare_polygon(a, b)
         index_a, index_b = self._upper_tangent(poly_a, poly_b)
+        if idx:
+            return index_a, index_b
         return [poly_a.point_list[index_a], poly_b.point_list[index_b]]
 
-    def lower_tangent(self, a, b):
+    def lower_tangent(self, a, b, idx=False):
         """
         Output the Lower Tangent
         :param a: polygon A
         :param b: polygon B
-        :return: Return the lower tangent points
+        :param idx: output index, default as false
+        :return: Return the lower tangent points or index
         """
         poly_a, poly_b = self._prepare_polygon(a, b)
         index_a, index_b = self._lower_tangent(poly_a, poly_b)
+        if idx:
+            return index_a, index_b
         return [poly_a.point_list[index_a], poly_b.point_list[index_b]]
 
     def _prepare_polygon(self, a, b):
@@ -241,15 +250,15 @@ class TangentPolygonCalculator:
         done = 0
         while not done:
             done = 1
-            # If the line crosses a, we move to the next counterclockwise a point
-            # If the line crosses b, we move to the next clockwise b point
+            # If the line crosses a, we move to the next clockwise a point
+            # If the line crosses b, we move to the next counterclockwise b point
             while orientation(poly_b_point_list[min_b_index], poly_a_point_list[max_a_index],
                               poly_a_point_list[(len(poly_a) + max_a_index - 1) % len(poly_a)]) == 2:
-                # Rotate counterclockwise to find next a location
+                # Rotate clockwise to find next a location
                 max_a_index = (len(poly_a) + max_a_index - 1) % len(poly_a)
             while orientation(poly_a_point_list[max_a_index], poly_b_point_list[min_b_index],
                               poly_b_point_list[(min_b_index + 1) % len(poly_b)]) == 1:
-                # Rotate clockwise to find next b location
+                # Rotate counterclockwise to find next b location
                 min_b_index = (min_b_index + 1) % len(poly_b)
                 done = 0
         return max_a_index, min_b_index

@@ -13,9 +13,11 @@ import copy
 class ConvexHullJarvis:
     def __init__(self, point_list):
         self.point_list = []
-        for val in point_list:
-            new_point = Point(val[0], val[1])
-            self.point_list.append(new_point)
+        for point in point_list:
+            if isinstance(point, Point):
+                self.point_list.append(point)
+            else:
+                self.point_list.append(Point(point[0], point[1]))
 
     def left_most_point(self):
         """
@@ -83,9 +85,11 @@ class ConvexHullJarvis:
 class ConvexHullGraham:
     def __init__(self, point_list):
         self.point_list = []
-        for val in point_list:
-            new_point = Point(val[0], val[1])
-            self.point_list.append(new_point)
+        for point in point_list:
+            if isinstance(point, Point):
+                self.point_list.append(point)
+            else:
+                self.point_list.append(Point(point[0], point[1]))
 
     def lowest_point(self):
         """
@@ -135,7 +139,7 @@ class ConvexHullGraham:
 
         # Sort the rest of the point list based on angle and distance
         starting_point = point_list[0]
-        point_list[1:] = sorted(point_list[1:], key=lambda p: sort_by_angle_and_distance(starting_point, p))
+        point_list[1:] = sorted(point_list[1:], key=lambda p1, p2: polar_comp(p1, p2, starting_point))
 
         # After sorted, update point list to remove points that are close and have the same angle
         updated_point_list = self.update_point_list(point_list)
@@ -163,7 +167,7 @@ class ConvexHullGraham:
 
 def sort_by_angle_and_distance(point1, point2):
     """
-    Self created function prioritizing slope, then distance
+    Self Created Function Prioritizing Slope, Then Distance
     :return: Sorting function
     """
     x1, y1 = point1.x, point1.y
@@ -178,7 +182,7 @@ def sort_by_angle_and_distance(point1, point2):
 
 def distance(point1, point2):
     """
-    Distance between point 1 and point 2
+    Distance Between Point 1 and Point 2
     :param point1: point 1
     :param point2: point 2
     :return: Distance between point 1 and point 2
