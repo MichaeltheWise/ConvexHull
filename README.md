@@ -8,4 +8,6 @@ My implementation of convex Hull Graham Scan has issues when points are in negat
 ## Phase 3:  
 Compute the upper tangents and lower tangents when given polygons  
 ## Phase 4:  
-Convex Hull divde-and-conquer algorithm using the upper and lower tangents
+Convex Hull divde-and-conquer algorithm using the upper and lower tangents  
+## Phase 5:  
+Try out some parallel processing concepts using **multiprocessing** in ParallelConvexHull
